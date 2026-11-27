@@ -5,7 +5,7 @@ description: "Self-hosted Subsonic / OpenSubsonic music server powered by MyGo M
 min_os_version: 1.5.0
 homepage: https://github.com/miantiao-me/GoSonic
 author: miantiao-me
-license: MIT
+license: AGPL-3.0
 locales:
   zh:
     name: GoSonic
@@ -28,20 +28,20 @@ locales:
       - 客户端请求转码时由内置 FFmpeg 实时处理；默认音质为安装时选择的档位
       - 数据保存在应用数据目录，卸载前请自行备份插件配置
 en:
-  usage: |
-      GoSonic is a self-hosted Subsonic / OpenSubsonic music server powered by MyGo Music plugins.
+  usage: |-
+    GoSonic is a self-hosted Subsonic / OpenSubsonic music server powered by MyGo Music plugins.
 
-      **First steps**
-      1. Open the app and sign in to the web console with the admin account set during installation
-      2. Click "+ Add Plugin" and enter a MyGo Music plugin repository (e.g. hubandad/mygo-music-netease, djyde/mygo-lizhi), review permissions and confirm
-      3. For plugins that need platform accounts, sign in via QR code or paste a Cookie in the console
+    **First steps**
+    1. Open the app and sign in to the web console with the admin account set during installation
+    2. Click "+ Add Plugin" and enter a MyGo Music plugin repository (e.g. hubandad/mygo-music-netease, djyde/mygo-lizhi), review permissions and confirm
+    3. For plugins that need platform accounts, sign in via QR code or paste a Cookie in the console
 
-      **Connect a player**
-      In any Subsonic client (MuseAmp, Feishin, Symfonium, Amperfy, ...), configure:
-      - Server address: this app's URL (use the in-box app address inside LazyCat)
-      - Username / password: the admin account set at installation
+    **Connect a player**
+    In any Subsonic client (MuseAmp, Feishin, Symfonium, Amperfy, ...), configure:
+    - Server address: this app's URL (use the in-box app address inside LazyCat)
+    - Username / password: the admin account set at installation
 
-      **Notes**
-      - Each plugin appears as its own MusicFolder; browse per source or search across all
-      - On-demand transcoding is handled by the bundled FFmpeg; default quality follows the installation choice
-      - Data lives in the app data directory; back up plugin config before uninstalling
+    **Notes**
+    - Each plugin appears as its own MusicFolder; browse per source or search across all
+    - On-demand transcoding is handled by the bundled FFmpeg; default quality follows the installation choice
+    - Data lives in the app data directory; back up plugin config before uninstalling

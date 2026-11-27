@@ -26,8 +26,7 @@ images:
     # digest 变化则 bump patch 版本
     tag_regex: '^(sha-[0-9a-f]+)$'
     delivery:
-      mode: mirror
-      require_digest_match: true
+      mode: lazycat
 
 stores:
   official:

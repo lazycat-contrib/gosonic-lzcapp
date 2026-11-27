@@ -1,0 +1,27 @@
+application:
+  subdomain: gosonic
+  public_path: [/]
+  upstreams:
+    - location: /
+      backend: http://gosonic:4533/
+
+services:
+  gosonic:
+    # 上游镜像 ghcr.io/miantiao-me/gosonic，只有 latest / sha-<commit> tag（无版本 tag），
+    # 按「不用 latest」规则钉住 sha tag 的 digest。
+    image: ghcr.1ms.run/miantiao-me/gosonic:sha-0b72861@sha256:86e246828ce1aff8ddf9779b8baeac2d5aef044f522b7ec1203d74d68600fb8f
+    environment:
+      - TZ=Asia/Shanghai
+      - GOSONIC_ADDR=:4533
+      - GOSONIC_DATA_DIR=/data
+      - GOSONIC_USER={{ .U.username }}
+      - GOSONIC_PASSWORD={{ .U.password }}
+      - GOSONIC_LANG={{ .U.language }}
+      - GOSONIC_QUALITY={{ .U.quality }}
+    binds: [/lzcapp/var/gosonic:/data]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:4533/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

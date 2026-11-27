@@ -1,0 +1,43 @@
+params:
+  - id: username
+    type: string
+    name: "Admin Username"
+    description: "Administrator account for the web console and Subsonic clients. Letters and numbers, e.g. admin."
+    default_value: "admin"
+    optional: false
+
+  - id: password
+    type: secret
+    name: "Admin Password"
+    description: "Password for the admin account. Used both in the web console and in every Subsonic player you connect."
+    default_value: "$random(len=16)"
+    optional: false
+
+  - id: language
+    type: string
+    name: "Interface Language"
+    description: "Console language: en or zh-CN."
+    default_value: "zh-CN"
+    optional: false
+
+  - id: quality
+    type: string
+    name: "Default Quality"
+    description: "Default streaming quality: standard, high, or lossless."
+    default_value: "lossless"
+    optional: false
+
+locales:
+  zh:
+    username:
+      name: "管理员用户名"
+      description: "Web 控制台和 Subsonic 播放器共用的管理员账号，仅字母和数字，如 admin。"
+    password:
+      name: "管理员密码"
+      description: "管理员账号密码，登录控制台和连接播放器时使用。"
+    language:
+      name: "界面语言"
+      description: "控制台语言：en 或 zh-CN。"
+    quality:
+      name: "默认音质"
+      description: "默认串流音质档位：standard（标准）、high（高）、lossless（无损）。"

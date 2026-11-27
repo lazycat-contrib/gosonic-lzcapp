@@ -1,0 +1,49 @@
+version: 1
+
+project:
+  target_arch: [amd64, arm64]
+
+tracker:
+  images:
+    - id: gosonic
+      source: ghcr.io/miantiao-me/gosonic
+      channel: custom
+      sort: semver
+      # 上游只发 latest / sha-<commit> tag，跟踪 sha tag
+      tag_regex: '^(sha-[0-9a-f]+)$'
+      mirror: true
+      require_digest_match: true
+      version_source:
+        type: bump
+        bump: patch
+
+delivery:
+  mode: mirror
+
+stores:
+  private:
+    enabled: true
+    name: "GoSonic"
+  official:
+    enabled: true
+    create_if_missing: true
+    skip_if_version_exists: true
+    application:
+      language: zh
+      name: GoSonic
+      brief: 自托管 Subsonic / OpenSubsonic 音乐服务器，聚合 MyGo Music 插件音源
+      description: GoSonic 将 MyGo Music 插件变成自托管的 Subsonic / OpenSubsonic 音乐服务器。在任意 Subsonic 客户端（MuseAmp、Feishin、Symfonium、Amperfy 等）中搜索、浏览、串流音乐、查看滚动歌词，并管理歌单与收藏。每个插件对应一个独立音乐库，可分源浏览或跨源统一搜索；客户端请求转码时由内置 FFmpeg 实时处理，支持无损直连与进度拖动。
+      keywords: 音乐, Subsonic, 流媒体, 自托管, 插件
+      source: https://github.com/miantiao-me/GoSonic
+      source_author: miantiao-me
+      support_pc: true
+      support_mobile: true
+      screenshot_pc_files:
+        - .github/screenshots/pc-console.png
+        - .github/screenshots/pc-add-plugin.png
+        - .github/screenshots/pc-flow.png
+        - .github/screenshots/pc-logs.png
+      screenshot_mobile_files:
+        - .github/screenshots/mobile-console.png
+        - .github/screenshots/mobile-add-plugin.png
+        - .github/screenshots/mobile-logs.png

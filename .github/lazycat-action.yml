@@ -1,33 +1,42 @@
 version: 1
 
 project:
-  target_arch: [amd64, arm64]
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: dist/gosonic.lpk
+  target_arch: amd64
 
-tracker:
-  images:
-    - id: gosonic
-      source: ghcr.io/miantiao-me/gosonic
-      channel: custom
-      sort: semver
-      # 上游只发 latest / sha-<commit> tag，跟踪 sha tag
-      tag_regex: '^(sha-[0-9a-f]+)$'
-      mirror: true
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: gosonic
+    bump: patch
+
+images:
+  - id: gosonic
+    target: service
+    service: gosonic
+    source: ghcr.io/miantiao-me/gosonic
+    channel: custom
+    sort: created
+    # 上游只发 latest / sha-<commit> tag（无版本 tag）：跟踪 mutable tag，
+    # digest 变化则 bump patch 版本
+    tag_regex: '^(sha-[0-9a-f]+)$'
+    delivery:
+      mode: mirror
       require_digest_match: true
-      version_source:
-        type: bump
-        bump: patch
-
-delivery:
-  mode: mirror
 
 stores:
-  private:
-    enabled: true
-    name: "GoSonic"
   official:
     enabled: true
-    create_if_missing: true
+    continue_if_newer_version: true
     skip_if_version_exists: true
+    create_if_missing: true
+    retry:
+      enabled: true
     application:
       language: zh
       name: GoSonic
@@ -47,3 +56,6 @@ stores:
         - .github/screenshots/mobile-console.png
         - .github/screenshots/mobile-add-plugin.png
         - .github/screenshots/mobile-logs.png
+  private:
+    enabled: true
+    skip_if_version_exists: false
